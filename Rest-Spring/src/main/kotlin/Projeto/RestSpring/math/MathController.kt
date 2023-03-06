@@ -1,5 +1,6 @@
 package Projeto.RestSpring.math
 
+import Projeto.RestSpring.exceptions.unssuportedMAthOperationException
 import org.apache.el.parser.BooleanNode
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,27 +10,25 @@ import java.lang.Exception
 @RestController
 class MathController {
     // RequestMaping permite uma ligacão entre o Path e o método manipulador(nesse caso: sum)
-
-
-    // PathVariable nos permite recuperar dados que foram passados na URL e usá-los
-
     @RequestMapping(value = ["/sum/{numberOne}/{numberTwo}"])
+    // PathVariable nos permite recuperar dados que foram passados na URL e usá-los
     fun sum(
         @PathVariable(value = "numberOne") numberOne: String,
         @PathVariable(value = "numberTwo") numberTwo: String
     ): Double {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception()
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw unssuportedMAthOperationException("Por favor escreva um valor numerico")
         return convertDouble(numberOne) + convertDouble(
             numberTwo
         )
     }
-
     @RequestMapping(value = ["/subtra/{numberOne}/{numberTwo}"])
     fun subtra(
         @PathVariable(value = "numberOne") numberOne: String,
         @PathVariable(value = "numberTwo") numberTwo: String
     ): Double {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception()
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw unssuportedMAthOperationException("Por favor escreva um valor numerico")
         return convertDouble(numberOne) - convertDouble(
             numberTwo
         )
@@ -41,7 +40,8 @@ class MathController {
         @PathVariable(value = "numberOne") numberOne: String,
         @PathVariable(value = "numberTwo") numberTwo: String
     ): Double {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception()
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw unssuportedMAthOperationException("Por favor escreva um valor numerico")
         return convertDouble(numberOne) * convertDouble(
             numberTwo
         )
@@ -52,7 +52,8 @@ class MathController {
         @PathVariable(value = "numberOne") numberOne: String,
         @PathVariable(value = "numberTwo") numberTwo: String
     ): Double {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception()
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw unssuportedMAthOperationException("Por favor escreva um valor numerico")
         return convertDouble(numberOne) / convertDouble(numberTwo)
     }
     fun isNumeric(number: String?): Boolean {
