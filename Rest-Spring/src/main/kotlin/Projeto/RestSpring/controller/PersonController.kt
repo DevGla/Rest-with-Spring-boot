@@ -20,11 +20,12 @@ class PersonController {
     // a mesma coisa disso: var service: PersonService = PersonService()
     // lateinit --> usado quando queremos dizer que vai ser setado posteriormente
 
-
     @RequestMapping(value = ["{id}"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun sum(
-        @PathVariable(value = "id") id: Long
-    ): Person {
+    fun findById(@PathVariable(value = "id") id: Long): Person {
         return service.findById(id)
+    }
+    @RequestMapping(method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun findAll(): List<Person> {
+        return service.findAll()
     }
 }
