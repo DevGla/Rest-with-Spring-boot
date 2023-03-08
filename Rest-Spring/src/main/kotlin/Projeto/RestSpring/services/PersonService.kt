@@ -16,7 +16,6 @@ class PersonService {
 
     fun findAll(): List<Person> {
         logger.info("Find All People!")
-
         val persons: MutableList<Person> = ArrayList()
         for (i in 0 .. 7){
             val person = mockPerson(i)
@@ -24,19 +23,29 @@ class PersonService {
         }
         return persons
     }
-
-
     fun findById(id: Long): Person {
         logger.info("Find One Person!")
         val person = Person()
         person.id = counter.incrementAndGet()
-        person.firstName = "lucas"
-        person.lastName = "almeida"
-        person.address = "rua duque de caxias"
+        person.firstName = "Person name $id"
+        person.lastName = "Person LastName $id"
+        person.address = "Some address in Brasil"
         person.gender = "male"
         return person
     }
 
+    fun createPerson(person: Person): Person {
+        // Lógica de ir ao banco e criar uma pessoa e retornar a mesma!
+        return person
+    }
+
+    fun updatePerson(person: Person): Person {
+        // Lógica de ir ao banco e atualizar uma pessoa e retornar a mesma!
+        return person
+    }
+
+    fun deletePerson(id: Long) {}
+    // Nesse caso aqui não retornamos nada.
     private fun mockPerson(i: Int): Person {
         val person = Person()
         person.id = counter.incrementAndGet()
