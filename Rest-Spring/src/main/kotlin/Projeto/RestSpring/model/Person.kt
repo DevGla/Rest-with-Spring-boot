@@ -7,7 +7,4 @@ data class Person (
     var lastName: String = "",
     var address: String = "",
     var gender: String = "",
-
-){
-
-}
+)
